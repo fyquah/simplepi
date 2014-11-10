@@ -4,19 +4,28 @@
     <link type="text/css" rel="stylesheet" href="/style.css" />
 </head>
 <body>
+    <h3 style="text-align : center">The Pie Chart Generator <br /><small style="color : #8c8c8c">Written in HTML / CSS3 / Javascript, no external libraries!</small></h3>
     <div id="chart"></div>
     <script src="/drawChart.js"></script>
+    <script src="/ui.js"></script>
+    <script src="/form.js"></script>
     <script src="/index.js"></script>
-    <form role="form" id="form">
-        <div id="slices-form">
+    <div id="chart-display"></div>
+    <div class="separator"></div>
 
-        </div>
+    <p class="centered">
+        <input type="text" id="radius-input-field" placeholder="Radius in pixels (default is 50px)" onkeyup="ui.radiusEventListener()"/>
+    </p>
+    <form role="form" id="form" style="text-align : center ; margin-top : 30px">
         <button onclick="chart_form.addSlice()">Add slice</button>
         <button onclick="chart_form.submit()">Draw Chart</button>
         <button onclick="chart_form.removeSlice()">Remove last slice</button>
+        <div id="slices-form" style="text-align : center"></div>
+        <button onclick="chart_form.addSlice()">Add slice</button>
+        <button onclick="chart_form.submit()">Draw Chart</button>
+        <button onclick="chart_form.removeSlice()">Remove last slice</button>
+
     </form>
-    <div id="chart-display">
-        
-    </div>
+
 </body>
 <html>

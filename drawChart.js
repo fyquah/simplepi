@@ -11,7 +11,7 @@ Slice.drawChart = (function(){
     var _current_degree = 0;
     var _deepClone = function(obj){
         return JSON.parse(JSON.stringify(obj));
-    }
+    };
     var _appendSlice = function(slice){
         var _degree = function(){
             // try to think by quadrants instead
@@ -22,17 +22,18 @@ Slice.drawChart = (function(){
                         "; -webkit-transform:rotate(" + _degree() + "deg);" + 
                         " -moz-transform:rotate(" + _degree() + "deg);" + 
                         "-o-transform:rotate(" + _degree() + "deg);" + 
-                        "transform:rotate(" + _degree() + "deg);'>\n" + 
+                        "transform:rotate(" + _degree() + "deg);" + 
+                        "'>\n" + 
                     "</div>\n" +
                 "</div>";
         // remember to update _current_degree before returning function
         _current_degree += slice.degree;
         return html;
-    }
+    };
 
-    return function(slices, radius){
-        if(slices.reduce(Slice.sumOfSlicesDegrees) > 360) {
-            return "<div>Sum of slices more than 360!</div>";
+    return function(slices){
+        if(slices.reduce(Slice.sumOfSlicesDegrees, 0) > 360) {
+            return false;
         }
         var return_html = "";
         _current_degree = 0;
