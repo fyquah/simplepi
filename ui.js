@@ -34,7 +34,29 @@ var ui = (function(){
                 _timeout_event = window.setTimeout(_resizeFunction, 500);
                 console.log(_timeout_event);
             }
-        }()
+        }(),
+        displayShareLink: function(link){
+            var twitter_box = document.querySelector("#show-off-box #twitter-button-wrapper"),
+                d = document,
+                clone, top_most_script, reloaded_script;
+
+            d.getElementById("show-off-box").style["display"] = "inline";
+            d.querySelector("#show-off-box #link").href = link;
+            d.querySelector("#show-off-box #link").innerHTML = link;
+            // then remove the contents of the twitter box
+            while(twitter_box.firstChild) {
+                twitter_box.removeChild(twitter_box.firstChild);
+            }
+
+            // add add it back again!
+            clone = '<a class="twitter-share-button" data-url="' + link + '" href="https://twitter.com/share" data-text="just created a simple chart!">Tweet</a>';
+            twitter_box.innerHTML = clone;
+            // force twitter script to run again
+            reloaded_script = d.createElement("script");
+            reloaded_script.src = "https://platform.twitter.com/widgets.js";
+            top_most_script = d.getElementsByTagName("script")[0];
+            top_most_script.parentNode.insertBefore(reloaded_script, top_most_script);
+        }
     }
 })();
     

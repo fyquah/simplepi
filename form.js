@@ -29,10 +29,10 @@ var chart_form = (function(){
         submit: function(){
             event.preventDefault();
             var i,
-                arr = [],
+                all_slices = [],
                 angle_str , color_str ,
                 form_elements = document.getElementById("form").elements,
-                target_node;
+                target_node, chart_html, link;
 
             for (i = 0 ; i < _slice_count ; i++) {
                 angle_str = form_elements["angle[" + i + "]"].value || 0;
@@ -40,7 +40,7 @@ var chart_form = (function(){
                 console.log(angle_str);
                 console.log(color_str);
                 console.log(form_elements);
-                arr.push(new Slice({ "degree": Number(angle_str), "color": color_str}));
+                all_slices.push(new Slice({ "degree": Number(angle_str), "color": color_str}));
             }
 
             target_node = document.getElementById("chart-display");
@@ -48,8 +48,20 @@ var chart_form = (function(){
                 target_node.removeChild(target_node.firstChild);
             }
             
-            target_node.innerHTML = Slice.drawChart(arr);    
-            ui.resizePieChartClasses(Number(form_elements["radius"].value) || 50);
+            var chart_html = Slice.drawChart(all_slices);
+            if (chart_html === false) {
+                alert("Your slices' degrees are more than 360 degrees!")
+                return false;
+            } else {
+                document.getElementById("chart-display").innerHTML = chart_html;
+            }
+            // update the url with the relvant query strings
+            link = all_slices.reduce(function(memo, slice, index){
+                return memo + "c" + index + "=" + slice.color + "&d" + index + "=" + slice.degree;
+            }, "/index.html?");
+
+            window.history.pushState(null, "new pie chart", link);
+            ui.displayShareLink(window.location.origin + link);
         }
     }
 })();
