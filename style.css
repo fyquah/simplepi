@@ -1,0 +1,48 @@
+.pieContainer {
+    height : 100px;
+    width: 100px;
+    position: relative;
+}
+
+.pieBackground {
+    background-color :gray;
+    position : absolute;
+    height: 100%;
+    width: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -o-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.pieContainer .pie-right {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    clip: rect(0px, 100px, 100px, 50px);
+}
+
+.pieContainer .pie-left {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    clip: rect(0px, 50px, 100px, 0px);
+}
+
+.pieContainer .pie-left .pie {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    clip: rect(0px, 100px, 100px, 50px);
+    border-radius: 50px;
+}
+
+.pieContainer .pie-right .pie {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    clip: rect(0px, 50px, 100px, 0px);
+}

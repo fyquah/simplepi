@@ -1,0 +1,24 @@
+sort all the slices according to their degree / percentage (large -> small)
+
+return_html = ""
+
+return_html += create a background slice (in case of 'others' situation)
+if weight_is_in_percentage:
+    convert_to_degrees
+
+current_deg = 0
+for slice in slices:
+    if current_deg + slice.degree > 180
+        # code to create two slices
+        left_slice = deep_copy(slice)
+        right_slice = deep_copy(slice)
+        left_slice.degree = 180 - current_deg
+        right_slice.degree = slice.deg - left_slice.degree
+        return_html += append_slice(left_slice)
+        return_html += append_slice(right_slice)
+    else
+        # code to create one slice
+        return_html += append_slice(slice)
+
+wrap_with_pie_container(return_html)
+return return_html
