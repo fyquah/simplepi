@@ -32,7 +32,7 @@ var chart_form = (function(){
                 all_slices = [],
                 angle_str , color_str ,
                 form_elements = document.getElementById("form").elements,
-                target_node, chart_html, link;
+                target_node, chart_html, link, radius, chart_html;
 
             for (i = 0 ; i < _slice_count ; i++) {
                 angle_str = form_elements["angle[" + i + "]"].value || 0;
@@ -48,7 +48,7 @@ var chart_form = (function(){
                 target_node.removeChild(target_node.firstChild);
             }
             
-            var chart_html = Slice.drawChart(all_slices);
+            chart_html = Slice.drawChart(all_slices);
             if (chart_html === false) {
                 alert("Your slices' degrees are more than 360 degrees!")
                 return false;
@@ -57,11 +57,17 @@ var chart_form = (function(){
             }
             // update the url with the relvant query strings
             link = all_slices.reduce(function(memo, slice, index){
-                return memo + "c" + index + "=" + slice.color + "&d" + index + "=" + slice.degree;
-            }, "/index.html?");
+                return memo + (index ? "&" : "") + "c" + index + "=" + slice.color + "&d" + index + "=" + slice.degree;
+            }, "?");
+
+            radius = Number(document.querySelector("#radius-input-field").value);
+            if(radius){ 
+                ui.resizePieChartClasses(radius || 50);
+                link += (link.length == 1 ? "" : "&") + "radius=" + radius ;
+            }
 
             window.history.pushState(null, "new pie chart", link);
-            ui.displayShareLink(window.location.origin + link);
+            ui.displayShareLink(window.location.origin + window.location.pathname + link);
         }
     }
 })();

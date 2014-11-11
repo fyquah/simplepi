@@ -61,7 +61,7 @@ Slice.drawChart = (function(){
         // then wrap the html in a pie container
         return_html = "<div class='pieBackground'></div>" + return_html;
         return_html = "<div class='pieContainer'>" + return_html + "</div>"
-
+        ui.resizePieChartClasses(Number(document.querySelector("input#radius-input-field").value) || 50); 
         return return_html;
     }
 })();

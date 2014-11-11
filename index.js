@@ -1,13 +1,14 @@
-document.addEventListener("DOMContentLoaded", function(event){
+var ready_event_handler = function(event){
     var query_strings = window.location.href.
         substring(window.location.href.indexOf("?") + 1).
         split("&").reduce(function(memo, str){
         memo[str.split("=")[0]] = str.split("=")[1];
         return memo;
-    }, {})
+    }, {}), radius;
+    radius = Number(query_strings["radius"]);
 
     if ((function(){
-        var prop, i, radius, all_color = [], 
+        var prop, i, all_color = [], 
             all_degree = [], 
             all_slices = [];
         var filterFunction = function(x){
@@ -40,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function(event){
         }
 
         document.getElementById('chart-display').innerHTML = Slice.drawChart(all_slices);
-        if (radius) { ui.resizePieChartClasses(radius); }
 
         return true;
 
@@ -54,4 +54,11 @@ document.addEventListener("DOMContentLoaded", function(event){
             "degree": 80, "color": "red"
         }]);
     }
-});
+
+    if(radius) {
+        ui.resizePieChartClasses(radius);
+    }
+};
+
+window.onpopstate = ready_event_handler;
+document.addEventListener("DOMContentLoaded", ready_event_handler);

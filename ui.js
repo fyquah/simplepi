@@ -1,6 +1,9 @@
 var ui = (function(){
     return {
         resizePieChartClasses: function(r) {
+            if (r <= 0) {
+                r = 50;
+            }
             var clip_properties = {
                 ".pieContainer .pie-right": "rect(" + 0 + "px, " + r * 2 + "px, " + r * 2 + "px, " + r + "px)",
                 ".pieContainer .pie-left": "rect(" + 0 + "px, " + r + "px, " + r * 2 + "px, " + 0 + "px)",
@@ -49,7 +52,7 @@ var ui = (function(){
             }
 
             // add add it back again!
-            clone = '<a class="twitter-share-button" data-url="' + link + '" href="https://twitter.com/share" data-text="just created a simple chart!">Tweet</a>';
+            clone = '<a class="twitter-share-button" href="https://twitter.com/share" data-url="' + link + '" data-text="just created a simple chart!">Tweet</a>';
             twitter_box.innerHTML = clone;
             // force twitter script to run again
             reloaded_script = d.createElement("script");
